@@ -13,9 +13,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
     }
 
-    var num = "";
-    var num2 = "";
-    var currentBtn = "1";
+    var num = ""
+    var num2 = ""
+    var currentBtn = "1"
+    var currentOperation = "+"
     fun onDigit(view: View){
         val button: Button = view as Button
         var id = button.id
@@ -65,7 +66,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onEquals(view: View){
-
+        var numText = findViewById<TextView>(R.id.tvInput)
+        var tempNum1 = num.toDouble()
+        var tempNum2 =  num2.toDouble()
+        if(currentOperation == "/"){
+            if(tempNum2 == 0.0){
+                numText.text = "You can't Divide by 0"
+            }
+            numText.text = (tempNum1 / tempNum2).toString()
+        }else if(currentOperation == "+"){
+                numText.text = (tempNum1 + tempNum2).toString()
+        }else if(currentOperation == "-"){
+                numText.text = (tempNum1 - tempNum2).toString()
+        }else if(currentOperation == "*"){
+                numText.text = (tempNum1 * tempNum2).toString()
+        }else{
+            numText.text = "Internal Error. Please Retry."
+        }
     }
 
     fun onExpression(view: View){
@@ -75,11 +92,21 @@ class MainActivity : AppCompatActivity() {
             R.id.btnClear -> {
                 num = ""
             }
-            else -> {
-                var inputText = findViewById<TextView>(R.id.tvInput)
-                inputText.text = ""
-                currentBtn = "2"
+            R.id.btnMul -> {
+                currentOperation = "*"
+            }
+            R.id.btnMinus -> {
+                currentOperation = "-"
+            }
+            R.id.btnPlus -> {
+                currentOperation = "+"
+            }
+            R.id.btnDiv -> {
+                currentOperation = "/"
             }
         }
+        var inputText = findViewById<TextView>(R.id.tvInput)
+        inputText.text = ""
+        currentBtn = "2"
     }
 }
