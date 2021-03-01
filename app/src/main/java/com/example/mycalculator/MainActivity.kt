@@ -52,15 +52,16 @@ class MainActivity : AppCompatActivity() {
             R.id.btn9 -> {
                 tempNum += "9"
             }
+            R.id.btnDot -> {
+                tempNum +="."
+            }
         }
         var numText = findViewById<TextView>(R.id.tvInput)
         if(currentBtn == "2"){
             num2 += tempNum
-//            Toast.makeText(this, num2, Toast.LENGTH_SHORT).show()
             numText.text = num2
         }else{
             num += tempNum
-//            Toast.makeText(this, num, Toast.LENGTH_SHORT).show()
             numText.text = num
         }
     }
@@ -83,6 +84,9 @@ class MainActivity : AppCompatActivity() {
         }else{
             numText.text = "Internal Error. Please Retry."
         }
+        num = ""
+        num2 = ""
+        currentBtn = "1"
     }
 
     fun onExpression(view: View){
@@ -91,6 +95,7 @@ class MainActivity : AppCompatActivity() {
         when(view.id){
             R.id.btnClear -> {
                 num = ""
+                num2 = ""
             }
             R.id.btnMul -> {
                 currentOperation = "*"
