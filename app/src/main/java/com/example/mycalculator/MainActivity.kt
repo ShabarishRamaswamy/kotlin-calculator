@@ -18,8 +18,6 @@ class MainActivity : AppCompatActivity() {
     var currentBtn = "1"
     var currentOperation = "+"
     fun onDigit(view: View){
-        val button: Button = view as Button
-        var id = button.id
         var tempNum = ""
         when(view.id){
             R.id.btn0 -> {
@@ -70,11 +68,13 @@ class MainActivity : AppCompatActivity() {
         var numText = findViewById<TextView>(R.id.tvInput)
         var tempNum1 = num.toDouble()
         var tempNum2 =  num2.toDouble()
+        var zero = 0
         if(currentOperation == "/"){
-            if(tempNum2 == 0.0){
+            if(tempNum2 == zero.toDouble()){
                 numText.text = "You can't Divide by 0"
+            }else{
+                numText.text = (tempNum1 / tempNum2).toString()
             }
-            numText.text = (tempNum1 / tempNum2).toString()
         }else if(currentOperation == "+"){
                 numText.text = (tempNum1 + tempNum2).toString()
         }else if(currentOperation == "-"){
@@ -91,11 +91,12 @@ class MainActivity : AppCompatActivity() {
 
     fun onExpression(view: View){
         val button: Button = view as Button
-        val id = button.id
         when(view.id){
             R.id.btnClear -> {
                 num = ""
                 num2 = ""
+                currentBtn = "1"
+                return
             }
             R.id.btnMul -> {
                 currentOperation = "*"
